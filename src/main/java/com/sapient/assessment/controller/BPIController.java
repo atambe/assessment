@@ -30,5 +30,13 @@ public class BPIController {
 		ResponseDTO response = bpiService.getHistoricalBPI(startDate, endDate, currency);
 		return new ResponseEntity<ResponseDTO>(response, HttpStatus.OK);
 	}
+	
+	@GetMapping("/downloadfiles")
+	public ResponseEntity<String> downLoadFiles(
+			) {
+
+		String response = bpiService.downloadFiles();
+		return new ResponseEntity<String>(response, HttpStatus.OK);
+	}
 
 }
