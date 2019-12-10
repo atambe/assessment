@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style>
+.respviz {
+	height: 400px;
+}
+
+@media screen and (min-width : 0px) and (max-width : 400px) {
+	.respviz {
+		height: 250px;
+	}
+}
+</style>
+<script>
+
+$(document).ready(function(){
+  $("button").click(function(){
+    alert("clicked");
+  });
+});
+funtion click(){
+alert("clicked");
+}
+
+
+/*$(document).ready(function(){
+  $("button").click(function(){
+  alert("Clicked");
+    var query = $("#query").val();
+   var htmlText = '<div class="col card"> <h1>Aberdeen</h1><iframe src="https://api.gdeltproject.org/api/v2/doc/doc?query='+query+'%20sourcecountry:US%20sourcelang:eng&mode=TimelineTone&timelinesmooth=30&timespan=1y&timezoom=yes&FORMAT=html" scrolling="no" width=100% frameborder="0" class="respviz"></iframe></div>'
+    $("#addComp").append(htmlText);
+  });
+});*/
+</script>
+
+
+</head>
+<body>
+	<div class="container">
+
+	<p>Name: <input id="query" type="text" name="user"></p>
+	<button id="addComp" onclick="click()">Add to Compare</button>
+
+		<div class="row">
+			<div class="col card">
+				<h2>TIAA </h2>
+
+				<iframe
+					src="https://api.gdeltproject.org/api/v2/doc/doc?query=TIAA%20sourcecountry:US%20sourcelang:eng&mode=TimelineTone&timelinesmooth=30&timespan=1y&timezoom=yes&FORMAT=html"
+					scrolling="no" width=100% frameborder="0" class="respviz"></iframe>
+			</div>
+
+			<div class="col card">
+				<h2>Nuveen</h2>
+
+				<iframe
+					src="https://api.gdeltproject.org/api/v2/doc/doc?query=Nuveen%20sourcelang:eng&mode=TimelineTone&timelinesmooth=30&timespan=1y&timezoom=yes&FORMAT=html"
+					scrolling="no" width=100% frameborder="0" class="respviz"></iframe>
+			</div>
+			<div class="col card">
+				<h1>Aberdeen</h1>
+
+				<iframe
+					src="https://api.gdeltproject.org/api/v2/doc/doc?query=aberdeen%20sourcecountry:US%20sourcelang:eng&mode=TimelineTone&timelinesmooth=30&timespan=1y&timezoom=yes&FORMAT=html"
+					scrolling="no" width=100% frameborder="0" class="respviz"></iframe>
+			</div>
+
+		</div>
+		<div id="compare" class="row">
+		</div>
+	</div>
+</body>
+</html>

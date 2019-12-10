@@ -32,11 +32,16 @@ public class BPIController {
 	}
 	
 	@GetMapping("/downloadfiles")
-	public ResponseEntity<String> downLoadFiles(
-			) {
+	public ResponseEntity<String> downLoadFiles(@RequestParam(value = "country", required = false, defaultValue = "US") String country) {
 
-		String response = bpiService.downloadFiles();
-		return new ResponseEntity<String>(response, HttpStatus.OK);
+		//String[] keys = {"aberdeen","fidelity","'Charles Schwab'"};
+		String[] keys = {"(Nuveen OR TIAA)"};
+		for (int i = 0; i < keys.length; i++) {
+			System.out.println(country);
+			String response = bpiService.downloadFiles(keys[i], country);
+		}
+		
+		return new ResponseEntity<String>("Downloaded All", HttpStatus.OK);
 	}
 
 }
