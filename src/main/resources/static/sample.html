@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-	crossorigin="anonymous"/>
-	<style>
+	crossorigin="anonymous" />
+<script src="https://use.fontawesome.com/3206f31fc7.js"></script>
+<style>
 .respviz {
 	height: 400px;
 }
@@ -18,50 +20,125 @@
 }
 </style>
 <script>
-$(document).ready(function(){
-  $("#addComp").click(function(){
-    alert($("#query").val());
-    var query = $("#query").val();
-    var iframetext = '<div class="col card"> <h1>'+query+'</h1> <iframe src="https://api.gdeltproject.org/api/v2/doc/doc?query='+query+'%20sourcecountry:US%20sourcelang:eng&mode=TimelineTone&timelinesmooth=30&timespan=1y&timezoom=yes&FORMAT=html" scrolling="no" width=100% frameborder="0" class="respviz"></iframe> </div>';
-    
-    $("#compare").append(iframetext);
-  });
-});
+	$(document)
+			.ready(
+					function() {
+						$("#addComp")
+								.click(
+										function() {
+
+											var query = $("#query").val();
+											var iframetext = '<iframe src="https://api.gdeltproject.org/api/v2/doc/doc?query='
+													+ query
+													+ '%20sourcecountry:US%20sourcelang:eng&mode=TimelineTone&timelinesmooth=30&timespan=1y&timezoom=yes&FORMAT=html" scrolling="no" width=100% frameborder="0" class="respviz"></iframe>';
+
+											var myCol = $('<div class="col-6 pb-3"></div>');
+											var myPanel = $('<div class="card " id="'
+													+ query.initCap()
+													+ '"><div class="card-header"><h5 class="float-left">'
+													+ query.initCap()
+													+ '</h5></span><button type="button" class="close" data-target="#'
+													+ query.initCap()
+													+ '" data-dismiss="alert"><span class="float-right"><i class="fa fa-remove"></i></span></button></div><div class="card-body">'
+													+ iframetext
+													+ '</div></div>');
+											
+											
+											
+											myPanel.appendTo(myCol);
+											myCol.appendTo('#contentPanel');
+											$('.close')
+													.on(
+															'click',
+															function(e) {
+																e
+																		.stopPropagation();
+																var $target = $(
+																		this)
+																		.parents(
+																				'.col-6');
+																$target
+																		.hide(
+																				'slow',
+																				function() {
+																					$target
+																							.remove();
+																				});
+															});
+											return false;
+										});
+
+						String.prototype.initCap = function() {
+							return this.toLowerCase().replace(/(?:^|\s)[a-z]/g,
+									function(m) {
+										return m.toUpperCase();
+									});
+						};
+
+					});
 </script>
 </head>
 <body>
-<div class="container">
-<p>Name: <input id="query" type="text" name="user"></p>
-
-<button id="addComp">Set the value of the input field</button>
-
-	<div class="row">
-			<div class="col card">
-				<h2>TIAA </h2>
-
-				<iframe
-					src="https://api.gdeltproject.org/api/v2/doc/doc?query=TIAA%20sourcecountry:US%20sourcelang:eng&mode=TimelineTone&timelinesmooth=30&timespan=1y&timezoom=yes&FORMAT=html"
-					scrolling="no" width=100% frameborder="0" class="respviz"></iframe>
+	<div class="container">
+		<div class="header">
+			<div class="col pb-3 pt-3">
+				<h1>Fleet to Show Average sentiment tone</h1>
 			</div>
-
-			<div class="col card">
-				<h2>Nuveen</h2>
-
-				<iframe
-					src="https://api.gdeltproject.org/api/v2/doc/doc?query=Nuveen%20sourcelang:eng&mode=TimelineTone&timelinesmooth=30&timespan=1y&timezoom=yes&FORMAT=html"
-					scrolling="no" width=100% frameborder="0" class="respviz"></iframe>
-			</div>
-			<div class="col card">
-				<h1>Aberdeen</h1>
-
-				<iframe
-					src="https://api.gdeltproject.org/api/v2/doc/doc?query=aberdeen%20sourcecountry:US%20sourcelang:eng&mode=TimelineTone&timelinesmooth=30&timespan=1y&timezoom=yes&FORMAT=html"
-					scrolling="no" width=100% frameborder="0" class="respviz"></iframe>
-			</div>
-
 		</div>
-		<div id="compare" class="row">
+		<div class="row">
+			<div class="col pb-5">
+				
+					Business Name: <input id="query" type="text" name="user"
+						class="form-control col-1" />
+					<button id="addComp" class="btn btn-info">Add on fleet</button>
+				
+			</div>
 		</div>
-</div>
+
+		<div class="row" id="contentPanel">
+			<!-- <div class="col-6 pb-3">
+				<div class="card">
+					<div class="card-header">
+						<h5 class="float-left">TIAA</h5>
+						<button type="button" class="close" data-target="#TIAAPanel"
+							data-dismiss="alert">
+							<span class="float-right"><i class="fa fa-remove"></i></span>
+						</button>
+					</div>
+					<div class="card-body">
+						<iframe
+							src="https://api.gdeltproject.org/api/v2/doc/doc?query=TIAA%20sourcecountry:US%20sourcelang:eng&mode=TimelineTone&timelinesmooth=30&timespan=1y&timezoom=yes&FORMAT=html"
+							scrolling="no" width=100% frameborder="0" class="respviz"></iframe>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-6 pb-3">
+				<div class="card">
+					<h5 class="card-header">Nuveen</h5>
+					<div class="card-body">
+						<iframe
+							src="https://api.gdeltproject.org/api/v2/doc/doc?query=Nuveen%20sourcelang:eng&mode=TimelineTone&timelinesmooth=30&timespan=1y&timezoom=yes&FORMAT=html"
+							scrolling="no" width=100% frameborder="0" class="respviz"></iframe>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-6 pb-3">
+				<div class="card">
+					<h5 class="card-header">Aberdeen</h5>
+					<div class="card-body">
+						<iframe
+							src="https://api.gdeltproject.org/api/v2/doc/doc?query=aberdeen%20sourcecountry:US%20sourcelang:eng&mode=TimelineTone&timelinesmooth=30&timespan=1y&timezoom=yes&FORMAT=html"
+							scrolling="no" width=100% frameborder="0" class="respviz"></iframe>
+					</div>
+				</div>
+			</div>
+
+	 -->
+		</div>
+
+	</div>
 </body>
 </html>
